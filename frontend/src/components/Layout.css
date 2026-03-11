@@ -1,0 +1,203 @@
+/* ═══════════════════════════════════════════════════════════════
+   LAYOUT (Sidebar + Header) — Responsive + 3D
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Search bar */
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.07);
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  width: 280px;
+  transition: all 0.25s ease;
+}
+.search-bar:focus-within {
+  border-color: var(--primary);
+  background: rgba(79,106,240,0.07);
+  box-shadow: 0 0 0 3px rgba(79,106,240,0.15);
+}
+.search-bar input {
+  background: transparent;
+  border: none;
+  color: white;
+  width: 100%;
+  outline: none;
+  font-family: inherit;
+  font-size: 0.85rem;
+}
+.search-bar input::placeholder { color: var(--text-muted); }
+
+/* Bell icon button */
+.icon-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 11px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+  transition: all 0.25s ease;
+}
+.icon-btn:hover {
+  background: rgba(79,106,240,0.12);
+  border-color: rgba(79,106,240,0.3);
+  color: white;
+  box-shadow: var(--shadow-neon-blue);
+  transform: rotate(-8deg) scale(1.05);
+}
+
+/* Badge */
+.badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background: linear-gradient(135deg, #E55454, #FF6B6B);
+  color: white;
+  font-size: 0.55rem;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  box-shadow: 0 0 8px rgba(229,84,84,0.6);
+}
+
+/* Hamburger button — hidden on desktop */
+.hamburger-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: var(--text-primary);
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+.hamburger-btn:hover {
+  background: rgba(79,106,240,0.12);
+  border-color: rgba(79,106,240,0.3);
+}
+
+/* Mobile logo — hidden on desktop */
+.mobile-logo {
+  display: none;
+  font-weight: 800;
+  font-size: 1.15rem;
+  letter-spacing: 0.05em;
+  background: linear-gradient(135deg, #fff 0%, #8899cc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Sidebar close button — hidden on desktop */
+.sidebar-close-btn {
+  display: none;
+  margin-left: auto;
+  color: var(--text-secondary);
+  padding: 0.25rem;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+.sidebar-close-btn:hover {
+  color: white;
+  background: rgba(255,255,255,0.08);
+}
+
+/* Backdrop overlay — NO blur, just a clean dark dim */
+.sidebar-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  /* NO backdrop-filter here — it was causing full-screen fog */
+  z-index: 99;
+  animation: backdropFadeIn 0.2s ease;
+}
+@keyframes backdropFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Responsive Breakpoints ──────────────────────────────── */
+
+/* Tablet (≤ 1024px) */
+@media (max-width: 1024px) {
+  .search-bar { width: 200px; }
+}
+
+/* Mobile (≤ 768px) */
+@media (max-width: 768px) {
+  /* Sidebar becomes slide-in drawer */
+  .sidebar {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 100;
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: none;
+  }
+  .sidebar.sidebar-open {
+    transform: translateX(0);
+    box-shadow: 4px 0 30px rgba(0,0,0,0.6), 0 0 60px rgba(79,106,240,0.15);
+  }
+
+  /* Show backdrop on mobile */
+  .sidebar-backdrop { display: block; }
+
+  /* Show hamburger + mobile logo */
+  .hamburger-btn { display: flex; }
+  .mobile-logo   { display: block; }
+  .sidebar-close-btn { display: flex; }
+
+  /* Hide desktop search on very small screens */
+  .search-bar { display: none; }
+
+  /* Top nav padding */
+  /* Solid top-nav on mobile — removes the backdrop-filter that causes blur bleed */
+  .top-nav {
+    padding: 0 1rem;
+    background: #060912;          /* fully opaque — no blur needed */
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  /* Make hamburger icon pixel-sharp */
+  .hamburger-btn {
+    will-change: transform;
+    image-rendering: crisp-edges;
+    transform: translateZ(0);     /* force GPU layer, prevents sub-pixel blurring */
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  .hamburger-btn svg {
+    display: block;
+    shape-rendering: crispEdges;
+  }
+
+  /* Page content */
+  .page-content { padding: 1rem; }
+
+  /* Logo area in sidebar */
+  .logo-area { padding: 0 1.25rem; }
+}
+
+/* Very small (≤ 400px) */
+@media (max-width: 400px) {
+  .sidebar { width: 260px; }
+}

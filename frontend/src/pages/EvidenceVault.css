@@ -1,0 +1,159 @@
+/* ═══════════════════════════════════════════════════════════
+   EVIDENCE VAULT — 3D Premium Edition
+   ═══════════════════════════════════════════════════════════ */
+
+.evidence-vault  { width: 100%; animation: fadeInUp 0.4s ease both; }
+.evidence-upload { width: 100%; animation: fadeInUp 0.4s ease both; }
+
+/* Vault tabs */
+.vault-tab {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  letter-spacing: 0.02em;
+}
+.vault-tab:hover {
+  background: rgba(255,255,255,0.05);
+  color: white;
+}
+.vault-tab.active {
+  background: linear-gradient(135deg, rgba(79,106,240,0.2), rgba(79,106,240,0.08));
+  border-color: rgba(79,106,240,0.35);
+  color: #7B9BFF;
+  box-shadow: 0 0 15px rgba(79,106,240,0.15), inset 0 1px 0 rgba(255,255,255,0.1);
+}
+
+/* ── Vault Grid ───────────────────────────────────────────── */
+.vault-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
+/* Evidence card — 3D flip-lift hover */
+.vault-card {
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: all 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+.vault-card:hover {
+  transform: translateY(-8px) rotateX(2deg) rotateY(-1deg);
+  box-shadow:
+    0 30px 60px rgba(0,0,0,0.6),
+    0 0 30px rgba(79,106,240,0.15),
+    inset 0 1px 0 rgba(255,255,255,0.1);
+  border-color: rgba(79,106,240,0.25);
+}
+
+/* Thumbnail shine effect on hover */
+.vault-card-img {
+  position: relative;
+  overflow: hidden;
+}
+.vault-card-img::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 40%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.12) 50%,
+    rgba(255,255,255,0) 100%
+  );
+  transform: skewX(-20deg);
+  opacity: 0;
+  transition: opacity 0.3s, left 0.5s;
+}
+.vault-card:hover .vault-card-img::after {
+  opacity: 1;
+  left: 120%;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── Upload Form Layout ───────────────────────────────────── */
+.grid-layout-upload {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+/* Drop zone */
+.upload-zone {
+  border: 2px dashed rgba(79,106,240,0.2);
+  border-radius: 16px;
+  padding: 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+  min-height: 250px;
+  cursor: pointer;
+}
+.upload-zone:hover {
+  border-color: rgba(79,106,240,0.4);
+  background: rgba(79,106,240,0.04);
+  box-shadow: 0 0 30px rgba(79,106,240,0.08);
+}
+.upload-zone.drag-active {
+  border-color: var(--primary);
+  background: rgba(79,106,240,0.08);
+  box-shadow: 0 0 40px rgba(79,106,240,0.2), inset 0 0 20px rgba(79,106,240,0.05);
+  transform: scale(1.01);
+}
+
+/* Select dropdown arrow */
+.select-arrow {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%234F6AF0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
+}
+
+/* Integrity Protocol panel */
+.protocol-item {
+  display: flex;
+  gap: 1rem;
+  padding: 0.875rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  transition: background 0.2s;
+}
+.protocol-item:hover { background: rgba(255,255,255,0.02); border-radius: 8px; padding-left: 0.5rem; }
+.protocol-item:last-child { border-bottom: none; }
+
+.protocol-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-top: 4px;
+  flex-shrink: 0;
+  box-shadow: 0 0 10px currentColor, 0 0 20px rgba(currentColor, 0.3);
+  animation: dotGlow 2.5s ease-in-out infinite;
+}
+@keyframes dotGlow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.7; transform: scale(1.3); }
+}
+
+.bg-green-400   { background-color: #4ade80; color: #4ade80; }
+.bg-blue        { background-color: #3AAFFF; color: #3AAFFF; }
+.bg-warning     { background-color: var(--accent-warning); }

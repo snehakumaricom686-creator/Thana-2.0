@@ -1,0 +1,199 @@
+/* ── GPS Capture Widget ──────────────────────────────────────── */
+
+.gps-capture {
+  border: 1px solid rgba(79, 106, 240, 0.2);
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.gps-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 1rem;
+  background: rgba(79, 106, 240, 0.08);
+  border-bottom: 1px solid rgba(79, 106, 240, 0.15);
+}
+
+.gps-icon-wrap {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  background: rgba(79, 106, 240, 0.2);
+  border: 1px solid rgba(79, 106, 240, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #7B9BFF;
+  flex-shrink: 0;
+}
+
+.gps-nav-icon {
+  animation: gpsPing 2.5s ease-in-out infinite;
+}
+@keyframes gpsPing {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(1.2); }
+}
+
+.gps-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #7B9BFF;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Status box */
+.gps-status-box {
+  padding: 1rem;
+  font-size: 0.82rem;
+}
+
+/* Idle */
+.gps-idle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+}
+
+/* Loading */
+.gps-loading {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  color: #7B9BFF;
+}
+.gps-subtext {
+  width: 100%;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  padding-left: 1.75rem;
+}
+.gps-spin {
+  animation: spin 1.2s linear infinite;
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Success */
+.gps-status-success .gps-status-box {
+  border-top: 1px solid rgba(74, 222, 128, 0.15);
+}
+.gps-success-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.gps-success-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+.gps-confirmed { color: #4ade80; }
+
+.gps-coords {
+  font-family: 'Courier New', monospace;
+  font-size: 0.72rem;
+  color: var(--text-primary);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+.gps-accuracy {
+  font-size: 0.65rem;
+  color: var(--text-secondary);
+  background: rgba(255,255,255,0.05);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  border: 1px solid rgba(255,255,255,0.07);
+}
+.gps-address {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  padding: 0.3rem 0.5rem;
+  background: rgba(255,255,255,0.03);
+  border-radius: 6px;
+  border-left: 2px solid rgba(74,222,128,0.3);
+}
+.gps-timestamp {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+.gps-actions-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+/* Error */
+.gps-error-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  color: var(--text-secondary);
+}
+.gps-error-text {
+  font-size: 0.75rem;
+  color: #FBBF24;
+}
+
+/* Buttons */
+.gps-btn-capture,
+.gps-btn-map,
+.gps-btn-refresh,
+.gps-btn-retry {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.gps-btn-capture {
+  margin: 0.5rem 1rem 1rem;
+  background: rgba(79,106,240,0.12);
+  border-color: rgba(79,106,240,0.3);
+  color: #7B9BFF;
+}
+.gps-btn-capture:hover {
+  background: rgba(79,106,240,0.2);
+  box-shadow: 0 0 12px rgba(79,106,240,0.2);
+}
+
+.gps-btn-map {
+  background: rgba(74,222,128,0.08);
+  border-color: rgba(74,222,128,0.25);
+  color: #4ade80;
+}
+.gps-btn-map:hover { background: rgba(74,222,128,0.15); }
+
+.gps-btn-refresh {
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,255,255,0.08);
+  color: var(--text-secondary);
+}
+.gps-btn-refresh:hover { color: white; background: rgba(255,255,255,0.08); }
+
+.gps-btn-retry {
+  background: rgba(251,191,36,0.08);
+  border-color: rgba(251,191,36,0.2);
+  color: #FBBF24;
+}
+.gps-btn-retry:hover { background: rgba(251,191,36,0.15); }

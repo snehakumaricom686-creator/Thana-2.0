@@ -1,0 +1,238 @@
+/* ═══════════════════════════════════════════════════════════
+   LOGIN — 3D Premium Edition
+   ═══════════════════════════════════════════════════════════ */
+
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #060912;
+  position: relative;
+  font-family: 'Outfit', sans-serif;
+  overflow: hidden;
+}
+
+/* Animated orbs background */
+.login-container::before,
+.login-container::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+}
+.login-container::before {
+  width: 600px;
+  height: 600px;
+  top: -150px;
+  left: -150px;
+  background: radial-gradient(circle, rgba(79,106,240,0.18) 0%, transparent 70%);
+  animation: orbMove1 10s ease-in-out infinite alternate;
+}
+.login-container::after {
+  width: 500px;
+  height: 500px;
+  bottom: -100px;
+  right: -100px;
+  background: radial-gradient(circle, rgba(229,84,84,0.12) 0%, transparent 70%);
+  animation: orbMove2 8s ease-in-out infinite alternate;
+}
+
+@keyframes orbMove1 {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(80px, 60px) scale(1.15); }
+}
+@keyframes orbMove2 {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(-60px, -80px) scale(1.1); }
+}
+
+/* Grid overlay */
+.login-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(79,106,240,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(79,106,240,0.04) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+}
+
+/* The card itself */
+.login-card {
+  width: 100%;
+  max-width: 460px;
+  padding: 3rem 2.5rem;
+  position: relative;
+  z-index: 10;
+  background: linear-gradient(135deg, rgba(17,24,39,0.95) 0%, rgba(10,15,30,0.98) 100%);
+  backdrop-filter: blur(40px);
+  border-radius: 24px;
+  border: 1px solid rgba(79,106,240,0.2);
+  box-shadow:
+    0 40px 80px rgba(0,0,0,0.7),
+    0 0 0 1px rgba(255,255,255,0.04) inset,
+    0 0 60px rgba(79,106,240,0.08),
+    var(--shadow-neon-blue);
+  animation: cardEntrance 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  transform-style: preserve-3d;
+}
+
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(40px) rotateX(8deg) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg) scale(1);
+  }
+}
+
+/* Top glow bar */
+.login-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--primary), #00D4AA, transparent);
+  border-radius: 0 0 50% 50%;
+  box-shadow: 0 0 20px var(--primary), 0 0 40px rgba(0,212,170,0.3);
+}
+
+.login-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+/* 3D shield icon */
+.login-logo-icon {
+  color: var(--primary);
+  display: inline-flex;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, rgba(79,106,240,0.2), rgba(79,106,240,0.05));
+  padding: 1.25rem;
+  border-radius: 50%;
+  border: 1px solid rgba(79,106,240,0.3);
+  box-shadow:
+    0 0 30px rgba(79,106,240,0.3),
+    0 8px 20px rgba(0,0,0,0.4),
+    inset 0 2px 0 rgba(255,255,255,0.15);
+  animation: shieldPulse 3s ease-in-out infinite;
+}
+
+@keyframes shieldPulse {
+  0%, 100% {
+    box-shadow: 0 0 25px rgba(79,106,240,0.3), 0 8px 20px rgba(0,0,0,0.4), inset 0 2px 0 rgba(255,255,255,0.15);
+  }
+  50% {
+    box-shadow: 0 0 45px rgba(79,106,240,0.5), 0 12px 30px rgba(0,0,0,0.5), inset 0 2px 0 rgba(255,255,255,0.2);
+  }
+}
+
+.login-header h1 {
+  font-size: 2.2rem;
+  letter-spacing: 0.12em;
+  font-weight: 800;
+  margin-bottom: 0.4rem;
+  background: linear-gradient(135deg, #ffffff 0%, #8899CC 60%, #4F6AF0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* Input wrapper with icon */
+.password-wrapper { position: relative; }
+
+.lock-icon {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.5;
+}
+
+/* Login button */
+.login-btn {
+  padding: 0.9rem;
+  font-size: 0.95rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #4F6AF0 0%, #6B4CF0 60%, #4F6AF0 100%);
+  background-size: 200% 200%;
+  box-shadow:
+    0 4px 20px rgba(79,106,240,0.5),
+    inset 0 1px 0 rgba(255,255,255,0.2);
+  animation: gradientShift 4s ease infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+
+.login-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 30px rgba(79,106,240,0.6), inset 0 1px 0 rgba(255,255,255,0.25);
+}
+.login-btn:active {
+  transform: translateY(-1px) scale(0.99);
+}
+
+/* Messages */
+.error-message {
+  background: linear-gradient(135deg, rgba(229,84,84,0.12), rgba(229,84,84,0.04));
+  border: 1px solid rgba(229,84,84,0.3);
+  color: #FF6B6B;
+  padding: 0.75rem;
+  border-radius: 10px;
+  margin-bottom: 1.25rem;
+  font-size: 0.875rem;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(229,84,84,0.1);
+}
+
+.success-message {
+  background: linear-gradient(135deg, rgba(79,176,95,0.12), rgba(79,176,95,0.04));
+  border: 1px solid rgba(79,176,95,0.3);
+  color: #6BCF7F;
+  padding: 0.75rem;
+  border-radius: 10px;
+  margin-bottom: 1.25rem;
+  font-size: 0.875rem;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(79,176,95,0.1);
+}
+
+.forgot-password {
+  color: var(--text-secondary);
+  transition: color 0.2s;
+}
+.forgot-password:hover {
+  color: var(--primary);
+  text-shadow: 0 0 10px var(--primary-glow);
+}
+
+/* Select arrow  */
+.select-arrow {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%234F6AF0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
+}
+
+.mt-4  { margin-top: 1rem; }
+.text-center { text-align: center; }
