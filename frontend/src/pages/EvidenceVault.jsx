@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
+import API_URL from '../apiConfig';
 import { 
   UploadCloud, 
   FileImage, 
@@ -43,7 +44,7 @@ const EvidenceVault = ({ view }) => {
   const fetchEvidence = async () => {
     setLoading(true);
     try {
-      const res = await axios.get('http://localhost:5000/api/evidence');
+      const res = await axios.get(`${API_URL}/api/evidence`);
       setEvidenceList(res.data || []);
     } catch(err) {
       console.error(err);
@@ -79,7 +80,7 @@ const EvidenceVault = ({ view }) => {
         submitData.append('locationCapturedAt', gpsLocation.capturedAt || new Date().toISOString());
       }
 
-      await axios.post('http://localhost:5000/api/evidence/upload', submitData, {
+      await axios.post(`${API_URL}/api/evidence/upload`, submitData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
       navigate('/evidence');

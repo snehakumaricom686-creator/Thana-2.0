@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import API_URL from '../apiConfig';
 import { Microscope, FileText, ShieldCheck, Upload, CheckCircle, Clock, Lock, AlertTriangle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import './ForensicDashboard.css';
@@ -23,7 +24,7 @@ const ForensicDashboard = () => {
   const fetchEvidence = async () => {
     setLoading(true);
     try {
-      const res = await axios.get('http://localhost:5000/api/evidence');
+      const res = await axios.get(`${API_URL}/api/evidence`);
       setEvidence(res.data || []);
     } catch (e) {
       console.error(e);
@@ -37,7 +38,7 @@ const ForensicDashboard = () => {
     if (!selectedEvidence || !reportText.trim()) return;
     setSubmitting(true);
     try {
-      await axios.post('http://localhost:5000/api/reports', {
+      await axios.post(`${API_URL}/api/reports`, {
         evidenceId: selectedEvidence._id,
         caseId: selectedEvidence.caseId,
         reportText,

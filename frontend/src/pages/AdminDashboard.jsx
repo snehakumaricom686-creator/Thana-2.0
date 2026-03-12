@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import API_URL from '../apiConfig';
 import {
   Crown, FolderOpen, ShieldCheck,
   Edit3, CheckCircle, XCircle, AlertTriangle, BarChart3
@@ -27,8 +28,8 @@ const AdminDashboard = () => {
     setLoading(true);
     try {
       const [casesRes, evidenceRes] = await Promise.all([
-        axios.get('http://localhost:5000/api/cases'),
-        axios.get('http://localhost:5000/api/evidence'),
+        axios.get(`${API_URL}/api/cases`),
+        axios.get(`${API_URL}/api/evidence`),
       ]);
       setCases(casesRes.data || []);
       setStats({ cases: casesRes.data.length, evidence: evidenceRes.data.length });
@@ -41,7 +42,7 @@ const AdminDashboard = () => {
 
   const updateCaseStatus = async (caseId, newStatus) => {
     try {
-      await axios.put(`http://localhost:5000/api/cases/${caseId}`, { status: newStatus });
+      await axios.put(`${API_URL}/api/cases/${caseId}`, { status: newStatus });
       setCases(prev => prev.map(c => c._id === caseId ? { ...c, status: newStatus } : c));
       setEditCase(null);
     } catch (e) {

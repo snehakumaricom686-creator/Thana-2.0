@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
+import API_URL from '../apiConfig';
 import {
   Search,
   Filter,
@@ -26,8 +27,8 @@ const CaseDetail = ({ id }) => {
     const fetchCaseDetails = async () => {
       try {
         const [caseRes, evidenceRes] = await Promise.all([
-          axios.get(`http://localhost:5000/api/cases/${id}`),
-          axios.get(`http://localhost:5000/api/evidence/case/${id}`)
+          axios.get(`${API_URL}/api/cases/${id}`),
+          axios.get(`${API_URL}/api/evidence/case/${id}`)
         ]);
         setCaseData(caseRes.data);
         setEvidenceList(evidenceRes.data);
@@ -189,7 +190,7 @@ const Cases = ({ view }) => {
 
   const fetchCases = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/cases');
+      const res = await axios.get(`${API_URL}/api/cases`);
       setCases(res.data);
     } catch (e) {
       console.error(e);
@@ -201,7 +202,7 @@ const Cases = ({ view }) => {
     try {
       const userStr = localStorage.getItem('thana2_user');
       const userObj = userStr ? JSON.parse(userStr) : null;
-      await axios.post('http://localhost:5000/api/cases', {
+      await axios.post(`${API_URL}/api/cases`, {
         ...newCaseData,
         stationCode: userObj?.stationCode || 'DEFAULT-01',
         location: caseGpsLocation || undefined,

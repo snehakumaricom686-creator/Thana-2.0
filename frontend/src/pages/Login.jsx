@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ShieldCheck, Lock, User, Target, Star } from 'lucide-react';
 import axios from 'axios';
+import API_URL from '../apiConfig';
 import './Login.css';
 
 const ROLES = [
@@ -28,8 +29,8 @@ const Login = ({ setAuth }) => {
 
     try {
       const endpoint = isLogin
-        ? 'http://localhost:5000/api/auth/login'
-        : 'http://localhost:5000/api/auth/register';
+        ? `${API_URL}/api/auth/login`
+        : `${API_URL}/api/auth/register`;
 
       const payload = isLogin
         ? { officerId, password, stationCode }

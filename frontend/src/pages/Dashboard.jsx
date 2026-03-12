@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import API_URL from '../apiConfig';
 import { 
   FolderOpenDot, 
   Files, 
@@ -27,8 +28,8 @@ const Dashboard = () => {
         }
 
         const [casesRes, evidenceRes] = await Promise.all([
-          axios.get('http://localhost:5000/api/cases').catch(() => ({ data: [] })),
-          axios.get('http://localhost:5000/api/evidence').catch(() => ({ data: [] }))
+          axios.get(`${API_URL}/api/cases`).catch(() => ({ data: [] })),
+          axios.get(`${API_URL}/api/evidence`).catch(() => ({ data: [] }))
         ]);
         
         setCases(casesRes.data || []);
